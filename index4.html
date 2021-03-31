@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-storage.js"></script>
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="images/logo .jpg" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form">
+					<span class="login100-form-title">
+						Account Setting
+					</span>
+
+					<div class="wrap-input100 validate-input" >
+						<input class="input100"id="firstname" type="text"  placeholder="firstname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user " aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" >
+						<input class="input100"id="lastname" type="text" name="email" placeholder="lastname">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user " aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" >
+						<input class="input100"id="phone" type="number" name="email" placeholder="phone">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-phone " aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    
+
+                    <div class="wrap-input100 validate-input" >
+						<select id="gender" class="input100">
+                            <option class="input100" value="" disabled selected>Gender</option>
+                            <option class="input100" value="male">Male</option>
+                            <option class="input100" value="Female">Female</option>
+                            <option class="input100" value="Others">Others</option>
+                        </select>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-mars-double " aria-hidden="true"></i>
+						</span>
+                    </div>
+                    
+                    <div class="wrap-input100 validate-input" >
+                        <select name=""  id="country" class="input100">
+                            <option value="" disabled selected>country</option>
+                            <option value="India">India</option>
+                            <option value="south africa">south africa</option>
+                            <option value="USA">USA</option>
+                            <option value="England">England</option>
+                            <option value="Rusia">Rusia</option>
+                        </select>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-flag" aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" >
+						<input class="input100" id="address" type="text" name="email" placeholder="Address">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-map-marker " aria-hidden="true"></i>
+						</span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" >
+						<input class="input100"id="bio" type="text"  placeholder="bio">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-address-card " aria-hidden="true"></i>
+						</span>
+                    </div>
+
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" id="btn-update" type="button">
+							Submit
+						</button>
+					</div>
+
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	
+	<script src="js/index.js"></script>
+	<script>
+		firebase.auth().onAuthStateChanged(function(user)
+		{
+			if(user)
+			{ 
+				var userID = firebase.auth().currentUser.uid;
+
+				firebase.database().ref('Users/' + userID).once('value').then(function(snapshot)
+				{
+					if(snapshot.val())
+					{
+						window.location.href = "main.html";
+					}
+				   
+				});
+			}
+		});
+	</script>
+
+</body>
+</html>
